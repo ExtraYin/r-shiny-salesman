@@ -3,7 +3,7 @@
 # https://github.com/toddwschneider/shiny-salesman
 
 library(shiny)
-source("draw_map.R")
+source("utils.R")
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
@@ -74,8 +74,7 @@ shinyServer(function(input, output, session) {
     }, priority=20)
     
     run_annealing_process = observe({
-        qry = parseQueryString(session$clientData$url_search)
-        if (input$go_button == 0 & is.null(qry$auto)) return()
+        if (input$go_button == 0) return()
         
         if (nrow(isolate(vals$cities)) < 2) return()
         
